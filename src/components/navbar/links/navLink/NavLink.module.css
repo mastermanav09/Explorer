@@ -14,5 +14,7 @@
 @media screen and (max-width: 1023px) {
   .container {
     min-width: 50px;
+    font-size: 0.9rem;
   }
 }
+ 

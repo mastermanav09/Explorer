@@ -1,7 +1,6 @@
 .links {
   display: flex;
   align-items: center;
-
   gap: 10px;
 }
 
@@ -35,6 +34,11 @@
   .menuButton {
     display: block;
     cursor: pointer;
+    outline: 0;
+    border: 0;
+    padding: 0.3rem 0.5rem;
+    border-radius: 3px;
+    background-color:mediumslateblue;
   }
 
   .mobileLinks {
@@ -42,12 +46,15 @@
     top: 100px;
     right: 0;
     width: 50%;
+    max-width: 15rem;
     height: calc(100vh - 100px);
     background-color: var(--bg);
     display: flex;
+    border-radius: 5px 0 0 0;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 10px;
+    background-color: rgb(137, 86, 184);
   }
 }
