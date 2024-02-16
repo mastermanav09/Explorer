@@ -2,9 +2,12 @@
 import { useState } from "react";
 import classes from "./Links.module.css";
 import NavLink from "./navLink/NavLink";
+import { handleLogout } from "@/lib/action";
+import { auth } from "@/lib/auth";
 
-const Links = () => {
+const Links = (props) => {
   const [openMenu, setOpenMenu] = useState(false);
+  const { session } = props;
 
   const links = [
     { title: "Homepage", path: "/" },
@@ -13,7 +16,6 @@ const Links = () => {
     { title: "Contact", path: "/contact" },
   ];
 
-  const session = true;
   const isAdmin = true;
 
   const toggleMenuHandler = () => {
@@ -26,12 +28,14 @@ const Links = () => {
         {links.map((link, index) => (
           <NavLink key={index} linkItem={link} />
         ))}
-        {session ? (
+        {session?.user ? (
           <>
-            {isAdmin && (
+            {session.user?.isAdmin && (
               <NavLink linkItem={{ title: "Admin", path: "/admin" }} />
             )}
-            <button className={classes.logout}>Logout</button>
+            <form action={handleLogout}>
+              <button className={classes.logout}>Logout</button>
+            </form>
           </>
         ) : (
           <NavLink linkItem={{ title: "Login", path: "/login" }} />
