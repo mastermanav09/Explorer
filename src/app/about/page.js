@@ -2,6 +2,11 @@ import React from "react";
 import Image from "next/image";
 import classes from "./About.module.css";
 
+export const metadata = {
+  title: "About page",
+  description: "About page description",
+};
+
 const AboutPage = () => {
   return (
     <div className={classes.container}>

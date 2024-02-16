@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./PostUser.module.css";
 import Image from "next/image";
-import { getUsers } from "@/lib/data";
+import { getUser } from "@/lib/data";
 
 // FETCH DATA WITH AN API
 // const getUser = async (userId) => {
@@ -18,7 +18,7 @@ import { getUsers } from "@/lib/data";
 // };
 
 const PostUser = async ({ userId }) => {
-  const user = await getUsers(userId);
+  const user = await getUser(userId);
 
   return (
     <div className={classes.container}>

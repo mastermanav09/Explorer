@@ -3,26 +3,37 @@ import classes from "./SinglePage.module.css";
 import Image from "next/image";
 import PostUser from "@/components/postUser/PostUser";
 import { getPost } from "@/lib/data";
+import moment from "moment";
 
-// export const generateMetadata = async ({ params }) => {
-//   const { slug } = params;
+export const generateMetadata = async ({ params }) => {
+  const { slug } = params;
+  const post = await getPost(slug);
 
-//
+  return {
+    title: post.title,
+    description: post.desc,
+  };
+};
 
-//   return {
-//     title: post.title,
-//     description: post.desc,
-//   };
-// };
+const getData = async (slug) => {
+  try {
+    const res = await fetch(`http://localhost:3000/api/blog/${slug}`);
 
-// const getData = async (slug) => {
+    if (!res.ok) {
+      throw new Error("Something went wrong!");
+    }
+
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// const deleteData = async (slug) => {
 //   try {
-//     const res = await fetch(
-//       `https://jsonplaceholder.typicode.com/posts/${slug}`,
-//       {
-//         next: { revalidate: 3600 },
-//       }
-//     );
+//     const res = await fetch(`http://localhost:3000/api/blog/${slug}`, {
+//       method: "DELETE",
+//     });
 
 //     if (!res.ok) {
 //       throw new Error("Something went wrong!");
@@ -36,13 +47,14 @@ import { getPost } from "@/lib/data";
 
 const SinglePagePost = async ({ params }) => {
   const { slug } = params;
-  const post = await getPost(slug);
+  const post = await getData(slug);
+  // const post = await getPost(slug);
 
   return (
     <div className={classes.container}>
-      {post.img && (
+      {post.image && (
         <div className={classes.imgContainer}>
-          <Image src={post.img} alt="" fill className={classes.img} />
+          <Image src={post.image} alt="" fill className={classes.img} />
         </div>
       )}
       <div className={classes.textContainer}>
@@ -57,12 +69,12 @@ const SinglePagePost = async ({ params }) => {
           )}
           <div className={classes.detailText}>
             <span className={classes.detailTitle}>Published</span>
-            {/* <span className={classes.detailValue}>
-              {post.createdAt.toString().slice(4, 16)}
-            </span> */}
+            <span className={classes.detailValue}>
+              {moment(post.createdAt).format("lll")}
+            </span>
           </div>
         </div>
-        <div className={classes.content}>{post.body}</div>
+        <div className={classes.content}>{post.desc}</div>
       </div>
     </div>
   );

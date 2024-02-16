@@ -18,8 +18,10 @@
 .title {
   color: gray;
   font-weight: bold;
+  font-size: 0.85rem;
 }
 
 .username {
   font-weight: 500;
+  color: white;
 }

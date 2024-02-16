@@ -17,9 +17,9 @@ const PostCard = (props) => {
   return (
     <div className={classes.container}>
       <div className={classes.top}>
-        {post.img && (
+        {post.image && (
           <div className={classes.imgContainer}>
-            <Image src={post.img} alt="" fill className={classes.img} />
+            <Image src={post.image} alt="" fill className={classes.image} />
           </div>
         )}
         <span className={classes.date}>
@@ -29,7 +29,7 @@ const PostCard = (props) => {
       <div className={classes.bottom}>
         <h1 className={classes.title}>{post.title}</h1>
         <p className={classes.desc}>{post.body}</p>
-        <Link className={classes.link} href={`/blog/${post.id}`}>
+        <Link className={classes.link} href={`/blog/${post.slug}`}>
           READ MORE
         </Link>
       </div>

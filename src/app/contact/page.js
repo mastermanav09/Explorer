@@ -1,12 +1,17 @@
-"use client";
+// "use client";
 import React from "react";
 import Image from "next/image";
 import classes from "./Contact.module.css";
 
+export const metadata = {
+  title: "Contact page",
+  description: "Contact page description",
+};
+
 const ContactPage = () => {
-  const formSubmit = (event) => {
-    console.log(event.target.value);
-  };
+  //  const formSubmit = (event) => {
+  //     console.log(event.target.value);
+  //   };
   return (
     <div className={classes.container}>
       <div className={classes.imgContainer}>

@@ -4,11 +4,8 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 
 const HomePage = () => {
-  const a = Math.random();
-  console.log(a);
   return (
     <div className={classes.container}>
-      {a}
       <div className={classes.textContainer}>
         <h1 className={classes.title}>Creative Thoughts Agency.</h1>
         <p className={classes.desc}>
