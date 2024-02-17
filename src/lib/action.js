@@ -34,13 +34,11 @@ export const addPost = async (prevState, formData) => {
   }
 };
 
-export const deletePost = async (formData) => {
-  const { postId } = Object.fromEntries(formData);
-
+export const deletePost = async (id) => {
   try {
     connectToDb();
 
-    await Post.findByIdAndDelete(postId);
+    await Post.findByIdAndDelete(id);
 
     console.log("Deleted post from Db");
     revalidatePath("/blog");
@@ -57,18 +55,20 @@ export const addUser = async (prevState, formData) => {
   // const title = formData.get("title");
   // const desc = formData.get("desc");
   // const slug = formData.get("slug");
-  const { username, email, password, img } = Object.fromEntries(formData);
+  const { username, email, password, img, isAdmin } =
+    Object.fromEntries(formData);
 
   try {
     connectToDb();
-    const newPost = new User({
+    const newUser = new User({
       username,
       email,
       password,
       img,
+      isAdmin: isAdmin === "true" ? true : false,
     });
 
-    await newPost.save();
+    await newUser.save();
     console.log("Saved user to Db");
     revalidatePath("/admin");
   } catch (error) {
